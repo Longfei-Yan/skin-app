@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -52,5 +53,12 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function avatar():Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => \Str::startsWith($value, ['http://', 'https://']) ? $value : \Storage::disk('public')->url($value),
+        );
     }
 }
