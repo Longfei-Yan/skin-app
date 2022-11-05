@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function store(UserRequest $request)
     {
-        $name = Str::random(20);
+        $name = Str::random(6);
         $email = $request->email;
         $password = $request->password;
         $path = '/images/avatar/default/';
