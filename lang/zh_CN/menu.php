@@ -14,5 +14,6 @@ return [
         'scaffold'      => '代码生成器',
         'icons'         => '图标',
         'user'          => '用户',
+        'articles'      => '文章',
     ],
 ];
