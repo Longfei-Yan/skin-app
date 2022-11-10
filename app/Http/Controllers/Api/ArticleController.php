@@ -14,4 +14,16 @@ class ArticleController extends Controller
         $article = Article::inRandomOrder()->first();
         return new ArticleResource($article);
     }
+
+    public function saying()
+    {
+        $article = Article::where('type', 'saying')->inRandomOrder()->first();
+        return new ArticleResource($article);
+    }
+
+    public function joke()
+    {
+        $article = Article::where('type', 'joke')->inRandomOrder()->first();
+        return new ArticleResource($article);
+    }
 }
