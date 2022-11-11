@@ -22,7 +22,7 @@ Route::prefix('v1')->name('api.v1.')->group(function (){
     ], function ($router) {
         Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
         Route::delete('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
-        Route::put('/refresh', [\App\Http\Controllers\Api\AuthController::class, 'refresh']);
+        Route::put('/refresh', [\App\Http\Controllers\Api\AuthConœtroller::class, 'refresh']);
         Route::get('/me', [\App\Http\Controllers\Api\AuthController::class, 'me']);
     });
 

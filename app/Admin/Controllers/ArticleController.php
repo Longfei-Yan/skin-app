@@ -60,10 +60,10 @@ class ArticleController extends AdminController
     {
         return Form::make(new Article(), function (Form $form) {
             $form->display('id');
-            $form->text('title')->rules('required');
+            $form->textarea('title')->rules('required');
             $form->textarea('content');
             $form->text('author')->rules('required_if:type,saying');
-            $form->select('type')->options(['saying'=>'谚语', 'joke'=>'冷笑话'])->rules('required');
+            $form->radio('type')->options(['saying'=>'谚语', 'joke'=>'冷笑话'])->rules('required')->default('saying');
 
             $form->display('created_at');
             $form->display('updated_at');
