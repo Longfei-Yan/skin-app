@@ -29,4 +29,5 @@ Route::prefix('v1')->name('api.v1.')->group(function (){
     Route::get('/articles', [\App\Http\Controllers\Api\ArticleController::class, 'index']);
     Route::get('/sayings', [\App\Http\Controllers\Api\ArticleController::class, 'saying']);
     Route::get('/jokes', [\App\Http\Controllers\Api\ArticleController::class, 'joke']);
+    Route::get('/weather', [\App\Http\Controllers\Api\WeatherController::class, 'index']);
 });
