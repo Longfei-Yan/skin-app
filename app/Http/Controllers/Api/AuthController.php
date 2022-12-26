@@ -8,6 +8,7 @@ use App\Http\Resources\UserResource;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -51,5 +52,36 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
+    }
+
+    /**
+     * 社会登录
+     */
+    public function socialStore($type, Request $request)
+    {
+        $driver = Socialite::driver($type);
+
+        try {
+            if ($code = $request->code) {
+                $access_token = $driver->getAccessTokenResponse($code);
+                $oauthUser = $driver->userFromToken($access_token);
+            } else {
+                $oauthUser = $driver->userFromToken($request->access_token);
+            }
+        } catch (\Exception $e) {
+            abort('403', 'Parameter error, no user information obtained');
+        }
+
+        if (!$oauthUser->id) {
+            abort('403', 'Parameter error, no user information obtained');
+        }
+
+        switch ($type) {
+            case 'google':
+                break;
+            case 'facebook':
+                dd($oauthUser);
+                break;
+        }
     }
 }

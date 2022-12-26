@@ -24,6 +24,9 @@ Route::prefix('v1')->name('api.v1.')->group(function (){
         Route::delete('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
         Route::put('/refresh', [\App\Http\Controllers\Api\AuthConœtroller::class, 'refresh']);
         Route::get('/me', [\App\Http\Controllers\Api\AuthController::class, 'me']);
+        // 第三方登录
+        Route::post('/socials/{social_type}/authorizations', [\App\Http\Controllers\Api\AuthController::class, 'socialStore'])
+            ->where('/social_type', 'google|fackbook');
     });
 
     Route::get('/articles', [\App\Http\Controllers\Api\ArticleController::class, 'index']);
